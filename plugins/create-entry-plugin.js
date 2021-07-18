@@ -34,36 +34,39 @@ const _pages = Array.isArray(pages) && pages.reduce((acc, p) =>  {
 }, [])
 
 console.log(_pages)
-/**生成虚拟文件*/
-function virtual(modules) {
-  return {
-    name: 'virtual',
-    resolveId(source) {
-      return source
-    },
-    load(id) {
-      return id in modules ? modules[id] : ''
-    }
-  }
-}
+
+
 const jsVm = {}
 const htmlVm = {}
 const inputInfo = {}
 
+/**生成虚拟文件*/
+function virtual() {
+  const vm = {...jsVm, ...htmlVm}
+  return {
+    name: 'virtual',
+    resolveId(id) {
+      return id in vm ? id : null
+    },
+    load(id) {
+      return id in vm ? vm[id] : null
+    }
+  }
+}
 _pages.forEach(p => {
   const _dir = join(process.cwd(), `src/pages/${p}/`)
   jsVm[`pages/${p}/${p}.js`] = createMainContent(_dir + 'index')
   htmlVm[`pages/${p}.html`] = createHtmlContent(`pages/${p}/${p}`)
   inputInfo[p] = `pages/${p}.html`
 })
-console.log(jsVm, htmlVm, inputInfo)
+// console.log(jsVm, htmlVm, inputInfo)
 
 export default () =>{  
   return {
     options(options = {}) {
        options.plugins = [
          virtual({...jsVm, ...htmlVm}),
-         ...options.plugins
+         ...options.plugins || []
        ]
        options.input = inputInfo
       }
