@@ -1,20 +1,34 @@
 import vue from '@vitejs/plugin-vue'
-import CreateEntryPlugin from './plugins/create-entry-plugin'
 const path = require('path')
+const { vms, inputInfo } = require('./vms.js')
 
-const config = ({command, mode}) => {
+/**生成虚拟文件*/
+function virtual() {
+  const vm = {...vms}
+  return {
+    name: 'virtual',
+    resolveId(id) {
+      return id in vm ? id : null
+    },
+    load(id) {
+      return id in vm ? vm[id] : null
+    }
+  }
+}
+
+export default () => {
   return {
     build: {
       rollupOptions: {
+        input: inputInfo,
         output: {
           dir: path.resolve(__dirname, 'dist')
         }
       }
     },    
     plugins:[
-      CreateEntryPlugin(),
+      virtual(vms),
       vue()
     ]
   }
 }
-export default config

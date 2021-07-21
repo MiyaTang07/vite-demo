@@ -39,36 +39,11 @@ console.log(_pages)
 const jsVm = {}
 const htmlVm = {}
 const inputInfo = {}
-
-/**生成虚拟文件*/
-function virtual() {
-  const vm = {...jsVm, ...htmlVm}
-  return {
-    name: 'virtual',
-    resolveId(id) {
-      return id in vm ? id : null
-    },
-    load(id) {
-      return id in vm ? vm[id] : null
-    }
-  }
-}
 _pages.forEach(p => {
-  const _dir = join(process.cwd(), `src/pages/${p}/`)
-  jsVm[`pages/${p}/${p}.js`] = createMainContent(_dir + 'index')
-  htmlVm[`pages/${p}.html`] = createHtmlContent(`pages/${p}/${p}`)
-  inputInfo[p] = `pages/${p}.html`
+    const _dir = join(process.cwd(), `src/pages/${p}/`)
+    jsVm[`pages/${p}/${p}.js`] = createMainContent(_dir + 'index')
+    htmlVm[`pages/${p}.html`] = createHtmlContent(`pages/${p}/${p}`)
+    inputInfo[p] = `pages/${p}.html`
 })
-// console.log(jsVm, htmlVm, inputInfo)
-
-export default () =>{  
-  return {
-    options(options = {}) {
-       options.plugins = [
-         virtual({...jsVm, ...htmlVm}),
-         ...options.plugins || []
-       ]
-       options.input = inputInfo
-      }
-  }
-}
+const vms = {...jsVm, ...htmlVm}
+module.exports = { vms, inputInfo}
