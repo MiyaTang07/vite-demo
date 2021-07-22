@@ -1,3 +1,4 @@
+const { clear } = require('console')
 const glob = require('glob')
 const { join } = require('path')
 
@@ -41,8 +42,8 @@ const htmlVm = {}
 const inputInfo = {}
 _pages.forEach(p => {
     const _dir = join(process.cwd(), `src/pages/${p}/`)
-    jsVm[`pages/${p}/${p}.js`] = createMainContent(_dir + 'index')
-    htmlVm[`pages/${p}.html`] = createHtmlContent(`pages/${p}/${p}`)
+    jsVm[`${p}/${p}.js`] = createMainContent(_dir + 'index')
+    htmlVm[`pages/${p}.html`] = createHtmlContent(`${p}/${p}`)
     inputInfo[p] = `pages/${p}.html`
 })
 const vms = {...jsVm, ...htmlVm}
