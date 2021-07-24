@@ -8,3 +8,8 @@
 
 ### 页面特殊处理
 - 使用<config>{页面信息}</config>，该特殊标签经过@vue/component-compiler-utils编译.vue的API方法获取该页面信息，并进行后续流程处理。（主要用来所有页面信息的统一输出和处理等。）
+- 针对.vue文件中的config标签需在settings.json中的vetur.grammar.customBlocks添加:"config": "json",使得新增的custom-block生效。
+- 设置完成后，需command+p搜索框显示后输入执行命令，令vetur配置生效。
+```
+>Vetur: Generate grammar
+```
