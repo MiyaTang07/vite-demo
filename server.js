@@ -1,6 +1,6 @@
 const express = require('express')
 const { createServer: createViteServer } = require('vite')
-const { vms } = require('./vms.js')
+const { vms } = require('./plugins/vms.js')
 const open = require('open')
 const ejs = require('ejs')
 
