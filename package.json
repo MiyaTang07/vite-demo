@@ -1,5 +1,6 @@
 {
   "version": "0.0.0",
+  "name": "vite-demo",
   "scripts": {
     "dev": "node server",
     "build": "vite build",

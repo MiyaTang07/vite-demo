@@ -1,14 +1,7 @@
-###  说明
-```安装教程
-# npm 6.x
-npm init @vitejs/app my-vue-app --template vue
-```
-```vite修改当前dev-server的根目录
-vite serve some/sub/dir
-```
-- https://github.com/rollup/awesome（该地址罗列了诸多rollup的plugins资源）
+### 项目说明
+- 在生产构建时，基于rollup的插件的hooks和约束大于配置原则，生成虚拟入口HTML和JS文件，一是方便以后的页面拓展和维护。
+- 在开发环境构建时，利用express生成本地客户端静态服务器，读取生产构建过程中的内存虚拟文件并返回静态资源。
+- 该项目可为前端多页项目构建提供静态模板
 
-1. 创建./src/pages/**/main.js入口虚拟文件 以及 **.html页面，动态引入main.js入口文件
-2. 使用 @rollup/plugin-html插件生成html文件，并且动态引入main.js文件 
-2. 寻找./src/pages/**/main.js文件内容
-3. 使用@rollup/plugin-multi-entry插件生成入口配置
+### 技术栈
+- vite、rollup、vue3.0、express
