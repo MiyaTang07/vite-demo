@@ -16,11 +16,14 @@ const htmlPageListDisplay = () => `
   <body>
     <div>
     <h3>所有页面集合👇</h3>
-      <% list.forEach(function(page){ %>
-        <div>
-         <a href="<%= page%>"><%= page%></a>   
+    <% for(let key in list) {%>
+      <div><%= key%></div>
+      <% list[key].forEach(function(page){ %>
+        <div style="margin-left:40px;">
+        |-<a href="<%= page.path%>"><%= page.name%></a>   
         </div>     
       <% }); %>
+      <% } %>
     </div>
   </body>
 </html>
@@ -35,7 +38,18 @@ async function createServer() {
   app.use(vite.middlewares)
 
   app.get('/', async (req, res) => {
-    const list = Object.keys(vms).filter(page => page.endsWith('.html'))
+    let list = Object.keys(vms).filter(page => page.endsWith('.html'))
+    list = list.reduce((acc, cur) => {
+      const items = cur.split('/', 6)
+      if(!acc[items[0]]) {
+        acc[items[0]] = []
+      }
+      acc[items[0]].push({
+        name: items[1],
+        path: cur
+      })
+      return acc
+    }, {})
     const html = ejs.render(htmlPageListDisplay(), {
       list,
       title: '页面导航'
