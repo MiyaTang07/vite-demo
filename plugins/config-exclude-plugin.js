@@ -1,3 +1,4 @@
+/**magin-string用来操作字符串和生成source-map*/
 import MagicString from 'magic-string'
 
 export default () => {
