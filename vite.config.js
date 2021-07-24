@@ -1,6 +1,7 @@
 const path = require('path')
 import vue from '@vitejs/plugin-vue'
 import virtual from './plugins/virtual-plugin.js'
+import configExclude from './plugins/config-exclude-plugin.js'
 const { vms, inputInfo } = require('./plugins/vms.js')
 
 
@@ -16,6 +17,7 @@ export default () => {
     },    
     plugins:[
       virtual(vms),
+      configExclude(),
       vue()
     ]
   }
