@@ -14,6 +14,11 @@ export default () => {
           dir: path.resolve(__dirname, 'dist')
         }
       }
+    },  
+    resolve:{
+      alias: {
+        '@pages': path.resolve(__dirname, 'src/pages')
+      }
     },    
     plugins:[
       virtual(vms),
