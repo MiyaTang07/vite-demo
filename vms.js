@@ -1,6 +1,9 @@
-const { clear } = require('console')
 const glob = require('glob')
 const { join } = require('path')
+if(global.vmsModules) {
+  module.exports = vmsModules
+  return
+}
 
 // 创建文件内容
 const createMainContent = name => `import { createApp } from 'vue'
@@ -34,7 +37,7 @@ const _pages = Array.isArray(pages) && pages.reduce((acc, p) =>  {
   return acc
 }, [])
 
-console.log(_pages)
+console.log('all pages cols are👉', _pages)
 
 
 const jsVm = {}
@@ -47,4 +50,5 @@ _pages.forEach(p => {
     inputInfo[p] = `pages/${p}.html`
 })
 const vms = {...jsVm, ...htmlVm}
-module.exports = { vms, inputInfo}
+global.vmsModules = { vms, inputInfo }
+module.exports = global.vmsModules

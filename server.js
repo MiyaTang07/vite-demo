@@ -11,14 +11,17 @@ const htmlPageListDisplay = () => `
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{title}}</title>
+    <title><%= title %></title>
   </head>
   <body>
-    <ul>
+    <div>
+    <h3>所有页面集合👇</h3>
       <% list.forEach(function(page){ %>
-        <a href="<%= page%>"><%= page%></a>        
+        <div>
+         <a href="<%= page%>"><%= page%></a>   
+        </div>     
       <% }); %>
-    </ul>
+    </div>
   </body>
 </html>
 `
@@ -35,7 +38,7 @@ async function createServer() {
     const list = Object.keys(vms).filter(page => page.endsWith('.html'))
     const html = ejs.render(htmlPageListDisplay(), {
       list,
-      title: '页面信息'
+      title: '页面导航'
     })
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)  
   })
