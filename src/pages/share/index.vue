@@ -3,24 +3,27 @@
     <div>
         我是count<button @click="countAdd">点我➕1</button>:{{count}}
     </div>
-    <data-emit @data-received="dataReceived"></data-emit>
+    <div class="mar_t_20">
+      <button @click="changeUserName">点我改变user的值</button>
+    </div>    
+    <name-list :user="user"></name-list>
 </template>
 
 <script>
-import DataEmit from '@pages/share/components/data-emit.vue'
+import NameList from '@pages/share/components/name-list.vue'
 export default {
     data() {
-        return { count: 0 }
+        return { user: 'mi' }
     },
     components: {
-        DataEmit
+        NameList
     },
     methods: {
         countAdd() {
             this.count++
         },
-        dataReceived(msg) {
-           alert(msg)
+        changeUserName() {
+           this.user = 'jo'
         }
     }
 }
@@ -35,6 +38,9 @@ export default {
 </config>
 
 <style scoped>
+.mar_t_20 {
+    margin-top: 20px;
+}
 button{
     margin: 0 10px;
 }
