@@ -12,7 +12,7 @@
 
 <script>
 import useFetchNameList from './useFetchNameList'
-import { computed } from 'vue'
+import { computed, toRefs } from 'vue'
 export default {
     props: {
         user: ''
@@ -20,8 +20,9 @@ export default {
     /**
      * 返回的对象将绑定到this实例化对象上，供this调用
      * */ 
-    setup(props) {        
-        const { nameList, getSearchedName, searchName } = useFetchNameList(props)
+    setup(props) { 
+        const { user } = toRefs(props)
+        const { nameList, getSearchedName, searchName } = useFetchNameList(user)
         
         const nameLen = computed(() => {
             const count = nameList.value.length

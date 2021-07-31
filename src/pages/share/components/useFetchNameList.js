@@ -1,6 +1,6 @@
-import { ref, onMounted, watch, toRefs} from 'vue'
+import { ref, onMounted, watch} from 'vue'
 
-export default (props) => {
+export default (user) => {
     const nameList = ref([])
     const repoList = ['miya', 'jone', 'tom', 'mary', 'jolin', 'christ', 'mike', 'caroline', 'jenny', 'feifei']
     
@@ -10,7 +10,6 @@ export default (props) => {
 
     onMounted(getNameList) // onMounted时候调用getUserRepositories
 
-    const { user } = toRefs(props)
     // 查询父级组件传递过来的user
     const getUserInformation = () => {
         // 更新 `props.user` 到 `user.value` 访问引用值
