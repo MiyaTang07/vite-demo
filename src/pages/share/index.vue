@@ -1,10 +1,7 @@
 <template>
     <h4>页面👉I am share</h4>
-    <div>
-        我是count<button @click="countAdd">点我➕1</button>:{{count}}
-    </div>
     <div class="mar_t_20">
-      <button @click="changeUserName">点我改变user的值</button>
+      <button @click="changeUserName">查询是否存在miya</button>
     </div>    
     <name-list :user="user"></name-list>
 </template>
@@ -19,11 +16,8 @@ export default {
         NameList
     },
     methods: {
-        countAdd() {
-            this.count++
-        },
         changeUserName() {
-           this.user = 'jo'
+           this.user = 'miya'
         }
     }
 }

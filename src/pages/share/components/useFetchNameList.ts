@@ -1,8 +1,8 @@
 import { ref, onMounted, watch} from 'vue'
 
-export default (user) => {
+export default (user: Record<string, string>) => {
     const nameList = ref([])
-    const repoList = ['miya', 'jone', 'tom', 'mary', 'jolin', 'christ', 'mike', 'caroline', 'jenny', 'feifei']
+    const repoList: Array<string> = ['miya', 'jone', 'tom', 'mary', 'jolin', 'christ', 'mike', 'caroline', 'jenny', 'feifei']
     
     const getNameList = async () => {
         nameList.value = await Promise.resolve(repoList)
